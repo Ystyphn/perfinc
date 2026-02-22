@@ -94,7 +94,7 @@ export function Navbar({navLinks}: NavbarProps){
           <Link key={index} href={item.href} 
             className="font-quantico text-[#cccccc] transition-[color] duration-600 hover:text-cyan-300 flex gap-2"
           >
-            <Icon/>
+            {Icon && <Icon/>}
             {item.linkName}
           </Link>
           );
@@ -140,7 +140,7 @@ export function Navbar({navLinks}: NavbarProps){
                 <Link key={index} href={item.href} 
                   className="font-quantico text-[#cccccc] transition-[color] duration-600 hover:text-theme-red flex gap-2"
                 >
-                  <Icon/>
+                  {Icon && <Icon/>}
                   {item.linkName}
                 </Link>
                 );
