@@ -19,6 +19,7 @@
   --font-quantico: "Quantico", sans-serif;
   --font-audiowide: "Audiowide", sans-serif;
   --font-jersey-25: "Jersey 25", sans-serif;
+  --text-shadow-red-glow: 0px 0px 35px var(--color-red-700);
 }
 
 @media (prefers-color-scheme: dark) {

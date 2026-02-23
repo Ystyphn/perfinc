@@ -4,20 +4,17 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Wallet, TrendingUp, CreditCard, ChartPie } from "lucide-react"
 import { useState } from "react";
+import { Drawer } from "./profileDrawer";
+import Image from "next/image";
 
 import type { LucideIcon } from "lucide-react";
 
 
 export interface Navlink{
   linkName: string;
-  href: string
-  icon?: LucideIcon,
-  current?: boolean
-}
-
-
-interface NavbarProps{
-  navLinks: Navlink[],
+  href: string;
+  icon?: LucideIcon;
+  current?: boolean;
 }
 
 
@@ -51,9 +48,37 @@ function LogoIcon(){
 }
 
 
+function ProfileButton({image, className, drawerDir = "down"}:{
+  image?: string;
+  className?: string;
+  drawerDir?: "top" | "down";
+}){
+  const [active, setActive] = useState<boolean>(false);
+
+  if (image){
+    return(
+      <div 
+        onClick={() => setActive(a => !a)}
+        className="relative rounded-4xl"
+      >
+        <Image 
+          width={30}
+          height={30}
+          src={image}
+          alt="User profile picture"
+          className={className ? className : "rounded-full"}
+        />
+        <Drawer active={active}/>
+      </div>
+    )
+  } else {
+    return <></>
+  }
+}
+
 export function LogoComponent(){
   return(
-  <div className="flex grow-2">
+  <div className="flex grow-1">
     <div className="p-2 pe-0 text-xl">
       <LogoIcon/>
     </div>
@@ -65,9 +90,13 @@ export function LogoComponent(){
 }
 
 
-export function Navbar({navLinks}: NavbarProps){
+export function Navbar({navLinks, name, email, image}: {
+  navLinks: Navlink[],
+  name?: string;
+  email?: string;
+  image?: string;
+}){
   const [drawerVisible, setDrawerVisible] = useState(false)
-
 
   return (
   <nav className="w-full h-[54px] relative flex flex-row border-b-[0.5px] border-[#cccccc] px-4 max-md:px-0 items-center">
@@ -102,6 +131,7 @@ export function Navbar({navLinks}: NavbarProps){
         }
 
         {/* Profile Button */}
+        <ProfileButton image={image}/>
       </ul>
     </div>
 
@@ -130,7 +160,9 @@ export function Navbar({navLinks}: NavbarProps){
               <X/>
             </button>
 
-            <LogoComponent/>
+            <div className="w-full flex items-center">
+              <LogoComponent />
+            </div>
 
             <ul className="px-4 pe-8 size-full flex flex-col gap-6">
               {navLinks.map((item, index) => {
@@ -148,6 +180,11 @@ export function Navbar({navLinks}: NavbarProps){
               }
             </ul>
           </div>
+
+          <ProfileButton 
+              image={image}
+              className="absolute bottom-0 left-0 rounded-full -translate-y-4 translate-x-4"
+            />
         </motion.div>
         }
       </AnimatePresence>

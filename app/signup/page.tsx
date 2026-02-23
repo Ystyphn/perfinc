@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 
 import "../globals.css";
 import { Footer } from "@/components/subcomponents/footer";
+import { auth, signIn } from "@/auth";
 
 
 function SignupForm(){
@@ -68,22 +69,32 @@ function SignupForm(){
       <div className="grow-1 h-[1px] bg-linear-to-r from-cyan-300/20 via-cyan-300 to-cyan-300/20"/>
     </div>
 
-    <button className="w-full py-1 mt-3 text-black text-lg text-center bg-white rounded-2xl flex gap-1 items-center justify-center cursor-pointer hover:bg-gray-200">
-      Sign in with Google
-      <FcGoogle />
-    </button>
+    {/* Sign in with Google */}
+    <form
+      action={async () => {
+        'use server';
+        await signIn("google");
+      }}
+    >
+      <button className="w-full py-1 mt-3 text-black text-lg text-center bg-white rounded-2xl flex gap-1 items-center justify-center cursor-pointer hover:bg-gray-200">
+        Sign in with Google
+        <FcGoogle />
+      </button>
+    </form>
   </div>
   )
 }
 
 
-export default function SignupPage(){
+export default async function SignupPage(){
   const navLinks: Navlink[] = [
     {
       linkName: "Home",
       href: "/",
     },
   ]
+  const session = await auth();
+  console.log(session);
 
   return(
   <div>

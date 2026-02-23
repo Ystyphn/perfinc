@@ -5,12 +5,14 @@ import { IncomeExpenseChart } from "../subcomponents/incomeExpenseChart";
 import { BudgetingPieChart } from "../subcomponents/pieChart";
 
 
-export function Overview(){
+export function Overview({user}:{
+  user: string;
+}){
   return (
   <div className="w-full py-4 pb-6 flex flex-col gap-4">
     {/* Heading */}
     <div className="w-full flex flex-col">
-      <h1 className="text-4xl font-jersey-25"><span className="gradient-1">Welcome back</span>, User</h1>
+      <h1 className="text-4xl font-jersey-25"><span className="gradient-1">Welcome back</span>, {user}</h1>
       <p className="font-quantico text-offwhite">Here's your financial overview for Month Year</p>
     </div>
 
