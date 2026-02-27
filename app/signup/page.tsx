@@ -3,10 +3,15 @@ import { FcGoogle } from "react-icons/fc";
 
 import "../globals.css";
 import { Footer } from "@/components/subcomponents/footer";
-import { auth, signIn } from "@/auth";
+import { signIn } from "@/auth";
 
 
 function SignupForm(){
+  const __signIn = async () => {
+    'use server'
+    await signIn("google", {redirectTo: "/dashboard"});
+  }
+
   return(
   <div 
     className="w-[500px] min-h-[300px] px-6 py-4 border-1 border-teal-600 rounded-2xl shadow-custom-1"
@@ -71,10 +76,7 @@ function SignupForm(){
 
     {/* Sign in with Google */}
     <form
-      action={async () => {
-        'use server';
-        await signIn("google");
-      }}
+      action={__signIn}
     >
       <button className="w-full py-1 mt-3 text-black text-lg text-center bg-white rounded-2xl flex gap-1 items-center justify-center cursor-pointer hover:bg-gray-200">
         Sign in with Google
@@ -93,8 +95,6 @@ export default async function SignupPage(){
       href: "/",
     },
   ]
-  const session = await auth();
-  console.log(session);
 
   return(
   <div>
