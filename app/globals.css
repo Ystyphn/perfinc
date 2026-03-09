@@ -19,6 +19,7 @@
   --font-quantico: "Quantico", sans-serif;
   --font-audiowide: "Audiowide", sans-serif;
   --font-jersey-25: "Jersey 25", sans-serif;
+  --shadow-cyan-sm: 0px 0px 20px rgba(77, 183, 223, 0.25);
   --text-shadow-red-glow: 0px 0px 35px var(--color-red-700);
 }
 
@@ -48,4 +49,14 @@ body {
 
 .gradient-2{
   @apply bg-linear-to-r from-cyan-300 via-white to-cyan-300 bg-clip-text text-transparent;
+}
+
+
+.text-field-1{
+  @apply px-4 py-2 mb-6 font-quantico text-base text-gray-300/25 border-2 border-cyan-500 rounded-xl focus:outline-1 focus:outline-cyan-100 focus:outline-offset-2;
+}
+
+
+.field-label-1{
+  @apply font-audiowide text-xl text-white;
 }
